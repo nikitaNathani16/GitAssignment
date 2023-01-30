@@ -1,0 +1,34 @@
+<apex:page controller="CalculatorController">
+    <apex:form > 
+        <apex:pageBlock title="My Calculator">
+            
+            <apex:pageBlockSection columns="1">
+                <script>
+                function decimalOnly(e){
+                    e.value = e.value.replace(/[^0-9\.]/g,'');
+                    if(e.value.split('.').length>2) e.value = e.value.replace(/\.+$/,"");
+                };          
+                </script>
+                <div style= "text-align:center"> 
+                    <apex:inputText label="Input 1" value="{!num1}" onkeyup="decimalOnly(this);"  />
+                    <apex:inputText label="Input 2" value="{!num2}" onkeyup="decimalOnly(this);" />
+                    
+                    <apex:selectRadio value="{!function}" label="Select Operator">
+                        <apex:selectOption itemValue="add" itemLabel="Add"/>
+                        <apex:selectOption itemValue="sub" itemLabel="Subtract"/>
+                        <apex:selectOption itemValue="multiply" itemLabel="Multiplication"/>
+                        <apex:selectOption itemValue="div" itemLabel="Division"/>
+                        
+                    </apex:selectRadio>
+                    <apex:commandButton value="Calculate" action="{!Calculate}"/>
+                    
+                    
+                    <apex:outputText label="Result" value="{!result}" >                 
+                    </apex:outputText>
+                </div>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+    </apex:form>
+    
+</apex:page>
